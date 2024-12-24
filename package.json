@@ -1,0 +1,14 @@
+{
+  "name": "stremio-tamil-movies",
+  "version": "1.0.0",
+  "description": "Stremio addon for Tamil movies with various categories and OTT information",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "stremio-addon-sdk": "^1.6.10",
+    "node-fetch": "^2.6.12",
+    "express": "^4.18.2"
+  }
+}
