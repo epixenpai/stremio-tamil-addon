@@ -17,13 +17,31 @@ async function catalogHandler({ type, id, extra }) {
             case 'tamil.recent':
                 endpoint = '/movie/now_playing';
                 break;
+            case 'english.mustwatch':
+                endpoint = '/trending/movie/week';
+                break;
+            case 'english.highgrossing':
+                endpoint = '/discover/movie';
+                extraParams = { sort_by: 'revenue.desc', with_original_language: 'en' };
+                break;
+            case 'english.newott':
+                endpoint = '/movie/upcoming';
+                break;
+            case 'english.intheatre':
+                endpoint = '/movie/now_playing';
+                extraParams = { with_original_language: 'en' };
+                break;
+            case 'english.scifi':
+                endpoint = '/discover/movie';
+                extraParams = { with_genres: '878', with_original_language: 'en' };
+                break;
             default:
                 throw new Error('Invalid catalog');
         }
 
-        const data = await fetchTMDBMovies(endpoint, page);
+        const data = await fetchTMDBMovies(endpoint, page, extraParams);
         
-        movies = await Promise.all(data.results.map(async movie => {
+        movies = await Promise.all(data.results.map(async (movie) => {
             const ottAvailability = await getOTTAvailability(movie.id);
             
             return {
